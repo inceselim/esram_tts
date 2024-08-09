@@ -8,7 +8,27 @@ function App() {
   const [lang, setLang] = useState("");
   const [voiceURI, setVoiceURI] = useState("");
 
-  const [text, setText] = useState("Seni çok seviyorum aşkım başarılar dilerim hep mutlu olasın")
+  const [text, setText] = useState(`The Lost Cat
+
+Lily is a little girl. She has a cat. The cat’s name is Mimi. Mimi is white and very cute. Every day, Lily plays with Mimi in the garden.
+
+One day, Lily cannot find Mimi. She looks in the house. Mimi is not there. She looks in the garden. Mimi is not there, too. Lily is sad.
+
+She asks her mom, "Mom, where is Mimi?"  
+Her mom says, "I don’t know, Lily. Let’s look outside."
+
+Lily and her mom walk outside. They call, "Mimi, Mimi!" But Mimi does not come. They walk to the park. They see a dog, a bird, and some flowers, but no Mimi.
+
+Then, Lily hears a sound. "Meow!" She looks up. Mimi is in the tree!  
+Lily is happy. She says, "Mimi, come down!" But Mimi is scared. She cannot come down.
+
+Lily's mom calls the fireman. The fireman comes with a big ladder. He climbs the tree and helps Mimi come down.
+
+Lily hugs Mimi. She says, "Thank you, Mr. Fireman!" The fireman smiles and says, "You’re welcome, Lily."
+
+Now, Lily is happy. She takes Mimi home. They play together in the garden again.
+
+This story is simple and uses basic vocabulary, perfect for someone learning English at an A1 level.`)
   const [highlightText, setHighlightText] = useState(true);
   const {
     Text, // Component that returns the modified text property
@@ -20,13 +40,13 @@ function App() {
   } = useSpeech({
     text: text, highlightText,
     volume: 1,
-    rate: 1,
-    highlightProps: { style: { color: "white", backgroundColor: "blue" } }
+    rate: 0.41,
+    highlightProps: { style: { color: "white", backgroundColor: "#1af", } }
     , lang, voiceURI,
   });
   return (
-    <div className="App">
-      <header className="App-header">
+    <>
+      <div className="App">
         <div>
           <label htmlFor="lang">Dil: </label>
           <select
@@ -58,16 +78,18 @@ function App() {
               ))}
           </select>
         </div>
-        <div style={{ display: "flex", flexDirection: "column", rowGap: "1rem" }}>
-          <Text />
-          <div style={{ display: "flex", columnGap: "0.5rem" }}>
-            {speechStatus !== "started" ? <button onClick={start}>Start</button> : <button onClick={pause}>Pause</button>}
-            <button onClick={stop}>Stop</button>
-          </div>
+        <div style={{ display: "flex", columnGap: "0.5rem" }}>
+          {speechStatus !== "started" ? <button onClick={start}>Start</button> : <button onClick={pause}>Pause</button>}
+          <button onClick={stop}>Stop</button>
         </div>
-        <img src={logo} className="App-logo" alt="logo" />
-      </header>
-    </div>
+        <header className="App-header">
+          <div style={{ display: "flex", padding: 70, flexDirection: "column", rowGap: "1rem" }}>
+            <Text />
+          </div>
+          {/* <img src={logo} className="App-logo" alt="logo" /> */}
+        </header>
+      </div>
+    </>
   );
 }
 
